@@ -4,11 +4,11 @@ services:
     build:
       context: ./build
       args:
-        IMAGE_BASE: ${IMAGE_BASE:-ghcr.io/ai-dock/base-image:cuda-12.5.1-runtime-24.04}
+        IMAGE_BASE: ${IMAGE_BASE:-hapnan/base-image:cuda-12.5.1-base-24.04}
       tags:
-        - "hapnan/linux-desktop:${IMAGE_TAG:-cuda-12.5.1-runtime-24.04}"
+        - "hapnan/linux-desktop:${IMAGE_TAG:-cuda-12.5.1-base-24.04}"
         
-    image: hapnan/linux-desktop:${IMAGE_TAG:-cuda-12.5.1-base-22.04}
+    image: hapnan/linux-desktop:${IMAGE_TAG:-cuda-12.5.1-base-24.04}
     
     shm_size: 2G
     
