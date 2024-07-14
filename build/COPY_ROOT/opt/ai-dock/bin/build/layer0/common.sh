@@ -328,17 +328,18 @@ function build_common_install_selkies() {
     fi
     
     cd /opt
-    curl -fsSL "https://github.com/selkies-project/selkies-gstreamer/releases/download/v${SELKIES_VERSION}/selkies-gstreamer-v${SELKIES_VERSION}-ubuntu$(grep VERSION_ID= /etc/os-release | cut -d= -f2 | tr -d '\"').tgz" | tar -zxf -
+    version_id=$(grep -oP 'VERSION_ID="\K[^"]+' /etc/os-release)
+    curl -fsSL "https://github.com/selkies-project/selkies-gstreamer/releases/download/v${SELKIES_VERSION}/gstreamer-selkies_v${SELKIES_VERSION}_ubuntu${version_id}_amd64.tar.gz" | tar -zxf -
     
     cd /tmp
     curl -fsSL -O "https://github.com/selkies-project/selkies-gstreamer/releases/download/v${SELKIES_VERSION}/selkies_gstreamer-${SELKIES_VERSION}-py3-none-any.whl"
     pip3 install "selkies_gstreamer-${SELKIES_VERSION}-py3-none-any.whl"
     
     cd /opt
-    curl -fsSL "https://github.com/selkies-project/selkies-gstreamer/releases/download/v${SELKIES_VERSION}/selkies-gstreamer-web-v${SELKIES_VERSION}.tgz" | tar -zxf -
+    curl -fsSL "https://github.com/selkies-project/selkies-gstreamer/releases/download/v${SELKIES_VERSION}/selkies-gstreamer-web-v${SELKIES_VERSION}.tar.gz" | tar -zxf -
     
     cd /tmp
-    curl -fsSL -o selkies-js-interposer.deb "https://github.com/selkies-project/selkies-gstreamer/releases/download/v${SELKIES_VERSION}/selkies-js-interposer-v${SELKIES_VERSION}-ubuntu$(grep VERSION_ID= /etc/os-release | cut -d= -f2 | tr -d '\"').deb"
+    curl -fsSL -o selkies-js-interposer.deb "https://github.com/selkies-project/selkies-gstreamer/releases/download/v${SELKIES_VERSION}/selkies_js_interposer_v${SELKIES_VERSION}_ubuntu${version_id}_amd64.deb"
     $APT_INSTALL ./selkies-js-interposer.deb
 }
 

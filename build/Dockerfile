@@ -1,5 +1,5 @@
 # For build automation - Allows building from any ai-dock base image
-ARG IMAGE_BASE="ghcr.io/ai-dock/base-image:cuda-11.8.0-runtime-22.04"
+ARG IMAGE_BASE="hapnan/base-image:cuda-12.5.0-base-24.04"
 FROM ${IMAGE_BASE}
 
 LABEL org.opencontainers.image.source https://github.com/ai-dock/linux-desktop
@@ -71,6 +71,9 @@ ENV IMAGE_SLUG="linux-desktop"
 
 # Use build scripts to ensure we can build all targets from one Dockerfile in a single layer.
 # Don't put anything heavy in here - We can use multi-stage building above if necessary.
+EXPOSE 8080/udp
+EXPOSE 8181/tcp
+EXPOSE 4455/tcp
 
 RUN set -eo pipefail && /opt/ai-dock/bin/build/layer0/init.sh | tee /var/log/build.log
 

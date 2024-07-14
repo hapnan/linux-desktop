@@ -1,26 +1,25 @@
-version: "3.8"
 # Compose file build variables set in .env
 services:
   supervisor:
     build:
       context: ./build
       args:
-        IMAGE_BASE: ${IMAGE_BASE:-ghcr.io/ai-dock/base-image:cuda-11.8.0-runtime-22.04}
+        IMAGE_BASE: ${IMAGE_BASE:-ghcr.io/ai-dock/base-image:cuda-12.5.1-runtime-24.04}
       tags:
-        - "ghcr.io/ai-dock/linux-desktop:${IMAGE_TAG:-cuda-11.8.0-runtime-22.04}"
+        - "hapnan/linux-desktop:${IMAGE_TAG:-cuda-12.5.1-runtime-24.04}"
         
-    image: ghcr.io/ai-dock/linux-desktop:${IMAGE_TAG:-cuda-11.8.0-base-22.04}
+    image: hapnan/linux-desktop:${IMAGE_TAG:-cuda-12.5.1-base-22.04}
     
     shm_size: 2G
     
     ## For Nvidia GPU's - You probably want to uncomment this
-    #deploy:
-    #  resources:
-    #    reservations:
-    #      devices:
-    #        - driver: nvidia
-    #          count: all
-    #          capabilities: [gpu]
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
     
     devices:
       - "/dev/dri:/dev/dri"
@@ -50,7 +49,10 @@ services:
         # Syncthing
         - ${SYNCTHING_UI_PORT_HOST:-8384}:${SYNCTHING_UI_PORT_HOST:-8384}
         - ${SYNCTHING_TRANSPORT_PORT_HOST:-22999}:${SYNCTHING_TRANSPORT_PORT_HOST:-22999}
-   
+        - 8080:8080/udp
+        - 8181:8181/tcp
+        - 4455:4455/tcp
+
     environment:
         # Don't enclose values in quotes
         - ENABLE_COTURN=${ENABLE_COTURN:-false}
