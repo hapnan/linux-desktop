@@ -49,7 +49,7 @@ jobs:
       -
         name: Set tags
         run: |
-          img_path="ghcr.io/${{ env.PACKAGE_NAME }}"
+          img_path="hapnan/${{ env.PACKAGE_NAME }}"
           ver_tag="cpu-${{ env.UBUNTU_VERSION }}"
           
           if [[ $ver_tag == ${{ env.LATEST_CPU }} ]]; then
@@ -113,7 +113,7 @@ jobs:
       -
         name: Set tags
         run: |
-          img_path="ghcr.io/${{ env.PACKAGE_NAME }}"
+          img_path="hapnan/${{ env.PACKAGE_NAME }}"
           ver_tag="cuda-${{ matrix.cuda }}-${{ matrix.level }}-${{ env.UBUNTU_VERSION }}"
           
           if [[ $ver_tag == ${{ env.LATEST_CUDA }} ]]; then
@@ -128,7 +128,7 @@ jobs:
         with:
           context: build
           build-args: |
-            IMAGE_BASE=ghcr.io/ai-dock/base-image:cuda-${{ matrix.cuda }}-${{ matrix.level }}-${{ env.UBUNTU_VERSION }}
+            IMAGE_BASE=hapnan/base-image:cuda-${{ matrix.cuda }}-${{ matrix.level }}-${{ env.UBUNTU_VERSION }}
           push: true
           provenance: false
           tags: ${{ env.TAGS }}
@@ -245,7 +245,7 @@ jobs:
       -
         name: Set tags
         run: |
-          img_path="ghcr.io/${{ env.PACKAGE_NAME }}"
+          img_path="hapnan/${{ env.PACKAGE_NAME }}"
           ver_tag="rocm-${{ matrix.rocm }}-${{ matrix.level }}-${{ env.UBUNTU_VERSION }}"
           
           if [[ $ver_tag == ${{ env.LATEST_ROCM }} ]]; then
