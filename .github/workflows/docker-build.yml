@@ -256,7 +256,7 @@ jobs:
           echo "TAGS=${TAGS}" >> ${GITHUB_ENV}
       -
         name: Build and push
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v6
         with:
           context: build
           build-args: |
