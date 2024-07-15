@@ -130,13 +130,21 @@ function build_common_install_xorg() {
 }
 
 function build_common_install_virtualgl() {
-    cd /tmp
-    wget "https://github.com/VirtualGL/virtualgl/releases/download/${VIRTUALGL_VERSION}/virtualgl_${VIRTUALGL_VERSION}_amd64.deb"
-    wget "https://github.com/VirtualGL/virtualgl/releases/download/${VIRTUALGL_VERSION}/virtualgl32_${VIRTUALGL_VERSION}_amd64.deb"
+    # cd /tmp
+    # wget "https://github.com/VirtualGL/virtualgl/releases/download/${VIRTUALGL_VERSION}/virtualgl_${VIRTUALGL_VERSION}_amd64.deb"
+    # wget "https://github.com/VirtualGL/virtualgl/releases/download/${VIRTUALGL_VERSION}/virtualgl32_${VIRTUALGL_VERSION}_amd64.deb"
     
-    $APT_INSTALL \
-        /tmp/virtualgl_${VIRTUALGL_VERSION}_amd64.deb \
-        /tmp/virtualgl32_${VIRTUALGL_VERSION}_amd64.deb
+    # $APT_INSTALL \
+    #     /tmp/virtualgl_${VIRTUALGL_VERSION}_amd64.deb \
+    #     /tmp/virtualgl32_${VIRTUALGL_VERSION}_amd64.deb
+    
+    $APT_INSTALL abiword gnupg apt-transport-https wget software-properties-common ratpoison novnc websockify libxv1 libglu1-mesa xauth x11-utils xorg tightvncserver 
+	cd /tmp
+    wget -q -O- https://packagecloud.io/dcommander/virtualgl/gpgkey | gpg --dearmor >/etc/apt/trusted.gpg.d/VirtualGL.gpg 
+    wget  https://raw.githubusercontent.com/VirtualGL/repo/main/VirtualGL.list
+    mv VirtualGL.list  /etc/apt/sources.list.d/VirtualGL.list
+	apt-get update 
+	$APT_INSTALL virtualgl virtualgl32 
     
     chmod u+s /usr/lib/libvglfaker.so
     chmod u+s /usr/lib/libdlfaker.so
@@ -329,17 +337,17 @@ function build_common_install_selkies() {
     
     cd /opt
     version_id=$(grep -oP 'VERSION_ID="\K[^"]+' /etc/os-release)
-    curl -fsSL "https://github.com/selkies-project/selkies-gstreamer/releases/download/v${SELKIES_VERSION}/gstreamer-selkies_v${SELKIES_VERSION}_ubuntu${version_id}_amd64.tar.gz" | tar -zxf -
+    curl -L "https://github.com/selkies-project/selkies-gstreamer/releases/download/v${SELKIES_VERSION}/gstreamer-selkies_gpl_v${SELKIES_VERSION}_ubuntu${version_id}_amd64.tar.gz" | tar -zxf -
     
     cd /tmp
-    curl -fsSL -O "https://github.com/selkies-project/selkies-gstreamer/releases/download/v${SELKIES_VERSION}/selkies_gstreamer-${SELKIES_VERSION}-py3-none-any.whl"
+    curl -L -O "https://github.com/selkies-project/selkies-gstreamer/releases/download/v${SELKIES_VERSION}/selkies_gstreamer-${SELKIES_VERSION}-py3-none-any.whl"
     pip3 install "selkies_gstreamer-${SELKIES_VERSION}-py3-none-any.whl"
     
     cd /opt
-    curl -fsSL "https://github.com/selkies-project/selkies-gstreamer/releases/download/v${SELKIES_VERSION}/selkies-gstreamer-web-v${SELKIES_VERSION}.tar.gz" | tar -zxf -
+    curl -L "https://github.com/selkies-project/selkies-gstreamer/releases/download/v${SELKIES_VERSION}/selkies-gstreamer-web-v${SELKIES_VERSION}.tar.gz" | tar -zxf -
     
     cd /tmp
-    curl -fsSL -o selkies-js-interposer.deb "https://github.com/selkies-project/selkies-gstreamer/releases/download/v${SELKIES_VERSION}/selkies_js_interposer_v${SELKIES_VERSION}_ubuntu${version_id}_amd64.deb"
+    curl -L -o selkies-js-interposer.deb "https://github.com/selkies-project/selkies-gstreamer/releases/download/v${SELKIES_VERSION}/selkies_js_interposer_v${SELKIES_VERSION}_ubuntu${version_id}_amd64.deb"
     $APT_INSTALL ./selkies-js-interposer.deb
 }
 
