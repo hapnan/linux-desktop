@@ -89,8 +89,8 @@ jobs:
         pytorch:
           - "2.2.1"
         exclude:
-          - python: "3.12"
-            pytorch: "2.1.2"
+          - python: "3.10"
+            pytorch: "2.2.1"
     steps:
       -
         name: Free Space
