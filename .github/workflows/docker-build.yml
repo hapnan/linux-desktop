@@ -86,11 +86,15 @@ jobs:
           - "devel"
         python:
           - "3.10"
+          - "3.11"
+          - "3.12"
         pytorch:
+          - "2.1.2"
+          - "2.2.0"
           - "2.2.1"
         exclude:
-          - python: "3.10"
-            pytorch: "2.2.1"
+          - python: "3.12"
+            pytorch: "2.1.2"
     steps:
       -
         name: Free Space
