@@ -1,5 +1,5 @@
 # For build automation - Allows building from any ai-dock base image
-ARG IMAGE_BASE="hapnan/base-image:v2-cuda-12.5.0-base-24.04"
+ARG IMAGE_BASE="hapnan/base-image:cuda-12.5.0-base-24.04"
 FROM ${IMAGE_BASE}
 
 LABEL org.opencontainers.image.source=https://github.com/ai-dock/linux-desktop
