@@ -339,9 +339,11 @@ function build_common_install_selkies() {
         pipx
 
     pipx ensurepath
-    
+
     pipx install pipx
 
+    sudo apt purge --autoremove pipx -y
+    
     hash -r
 
     if [[ -z $SELKIES_VERSION || ${SELKIES_VERSION,,} == 'latest' ]]; then
