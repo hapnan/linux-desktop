@@ -361,11 +361,8 @@ function build_common_install_selkies() {
     curl -L "https://github.com/selkies-project/selkies-gstreamer/releases/download/v${SELKIES_VERSION}/selkies-gstreamer-web_v${SELKIES_VERSION}.tar.gz" | tar -zxf -
     
     cd /tmp
-    curl  "https://github.com/selkies-project/selkies-gstreamer/releases/download/v${SELKIES_VERSION}/selkies-js-interposer_v${SELKIES_VERSION}_ubuntu${SELKIES_VERSION}_amd64.tar.gz" | tar -zxf -
-    cp selkies_joystick_interposer*.so /usr/lib/x86_64-linux-gnu/
-    cp selkies_joystick_interposer*.so /usr/lib/i386-linux-gnu/
-    
-
+    curl -L -O "https://github.com/selkies-project/selkies-gstreamer/releases/download/v${SELKIES_VERSION}/selkies-js-interposer_v${SELKIES_VERSION}_ubuntu${SELKIES_VERSION}_amd64.deb" | tar -zxf -
+    $APT_INSTALL ./selkies-js-interposer_v${SELKIES_VERSION}_ubuntu${version_id}_amd64.deb
 
 }
 
