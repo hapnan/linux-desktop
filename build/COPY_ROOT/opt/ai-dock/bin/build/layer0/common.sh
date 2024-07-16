@@ -336,7 +336,7 @@ function build_common_install_selkies() {
         python3-chardet \
         python3-debian \
         xdotool \
-        python3-pipx
+        pipx
 
     pipx ensurepath
 
