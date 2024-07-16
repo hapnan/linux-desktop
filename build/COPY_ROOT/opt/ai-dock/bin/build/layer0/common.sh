@@ -344,7 +344,8 @@ function build_common_install_selkies() {
         SELKIES_VERSION="$(curl -fsSL "https://api.github.com/repos/selkies-project/selkies-gstreamer/releases/latest" \
             | jq -r '.tag_name' | sed 's/[^0-9\.\-]*//g')"
     fi
-    sudo pipx ensurepath --global 
+
+    pipx ensurepath --global 
 
     cd /opt
     version_id=$(grep -oP 'VERSION_ID="\K[^"]+' /etc/os-release)
@@ -359,7 +360,7 @@ function build_common_install_selkies() {
     
     cd /tmp
     curl -L "https://github.com/selkies-project/selkies-gstreamer/releases/download/v${SELKIES_VERSION}/selkies_js_interposer_v${SELKIES_VERSION}_ubuntu${version_id}_amd64.deb"
-    $APT_INSTALL ./selkies-js-interposer_v1.6.1_ubuntu24.04_amd64.deb
+    $APT_INSTALL ./selkies-js-interposer_v${SELKIES_VERSION}_ubuntu${version_id}_amd64.deb
 }
 
 function build_common_install_coturn() {
