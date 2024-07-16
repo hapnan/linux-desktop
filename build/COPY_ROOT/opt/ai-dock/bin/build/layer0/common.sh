@@ -304,6 +304,11 @@ function build_common_install_packages() {
 function build_common_install_selkies() {
     # Install latest Selkies-GStreamer (https://github.com/selkies-project/selkies-gstreamer) build, Python application, and web application, should be consistent with selkies-gstreamer documentation
     $APT_INSTALL \
+        python3-pip \
+        python3-dev \
+        python3-gi \
+        python3-setuptools \
+        python3-wheel \
         libgl-dev \
         libgles-dev \
         libglvnd-dev \
@@ -328,10 +333,13 @@ function build_common_install_selkies() {
         libgdk-pixbuf2.0-0 \
         libsoup-gnome2.4-1 \
         libxdo3 \
-        xdotool
+        python3-chardet \
+        python3-debian \
+        xdotool \
+        python3-pipx
 
-    pip install --break-system-packages debian chardet wheel setuptools dev pip gi
-    
+    pipx ensurepath
+
     if [[ -z $SELKIES_VERSION || ${SELKIES_VERSION,,} == 'latest' ]]; then
         SELKIES_VERSION="$(curl -fsSL "https://api.github.com/repos/selkies-project/selkies-gstreamer/releases/latest" \
             | jq -r '.tag_name' | sed 's/[^0-9\.\-]*//g')"
@@ -343,7 +351,7 @@ function build_common_install_selkies() {
     
     cd /tmp
     curl -L -O "https://github.com/selkies-project/selkies-gstreamer/releases/download/v${SELKIES_VERSION}/selkies_gstreamer-${SELKIES_VERSION}-py3-none-any.whl"
-    pip3 install "selkies_gstreamer-${SELKIES_VERSION}-py3-none-any.whl"
+    pipx install "selkies_gstreamer-${SELKIES_VERSION}-py3-none-any.whl"
     
     cd /opt
     curl -L "https://github.com/selkies-project/selkies-gstreamer/releases/download/v${SELKIES_VERSION}/selkies-gstreamer-web-v${SELKIES_VERSION}.tar.gz" | tar -zxf -
