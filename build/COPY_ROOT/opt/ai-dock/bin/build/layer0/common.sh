@@ -361,8 +361,10 @@ function build_common_install_selkies() {
     curl -L "https://github.com/selkies-project/selkies-gstreamer/releases/download/v${SELKIES_VERSION}/selkies-gstreamer-web_v${SELKIES_VERSION}.tar.gz" | tar -zxf -
     
     cd /tmp
-    curl -L "https://github.com/selkies-project/selkies-gstreamer/releases/download/v${SELKIES_VERSION}/selkies_js_interposer_v${SELKIES_VERSION}_ubuntu${version_id}_amd64.deb"
-    $APT_INSTALL ./selkies-js-interposer_v${SELKIES_VERSION}_ubuntu${version_id}_amd64.deb
+    curl -o selkies-js-interposer.deb -fsSL "https://github.com/selkies-project/selkies-gstreamer/releases/download/v${SELKIES_VERSION}/selkies_js_interposer_v${SELKIES_VERSION}_ubuntu${version_id}_amd64.deb"
+    sudo apt-get update  
+    $APT_INSTALL --no-install-recommends ./selkies-js-interposer.deb rm
+
 }
 
 function build_common_install_coturn() {
