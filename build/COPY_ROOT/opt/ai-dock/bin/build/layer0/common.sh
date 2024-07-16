@@ -303,12 +303,7 @@ function build_common_install_packages() {
 
 function build_common_install_selkies() {
     # Install latest Selkies-GStreamer (https://github.com/selkies-project/selkies-gstreamer) build, Python application, and web application, should be consistent with selkies-gstreamer documentation
-    $APT_INSTALL --break-system-packages \
-        python3-pip \
-        python3-dev \
-        python3-gi \
-        python3-setuptools \
-        python3-wheel \
+    $APT_INSTALL \
         libgl-dev \
         libgles-dev \
         libglvnd-dev \
@@ -333,9 +328,9 @@ function build_common_install_selkies() {
         libgdk-pixbuf2.0-0 \
         libsoup-gnome2.4-1 \
         libxdo3 \
-        python3-chardet \
-        python3-debian \
         xdotool
+
+    pip install --break-system-packages debian chardet wheel setuptools dev pip gi
     
     if [[ -z $SELKIES_VERSION || ${SELKIES_VERSION,,} == 'latest' ]]; then
         SELKIES_VERSION="$(curl -fsSL "https://api.github.com/repos/selkies-project/selkies-gstreamer/releases/latest" \
