@@ -338,9 +338,9 @@ function build_common_install_selkies() {
         xdotool \
         pipx
 
+    pipx ensurepath
+    
     pipx install pipx
-
-    sudo apt purge --autoremove pipx
 
     hash -r
 
