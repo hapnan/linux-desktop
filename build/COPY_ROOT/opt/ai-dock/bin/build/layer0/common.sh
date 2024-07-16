@@ -303,7 +303,7 @@ function build_common_install_packages() {
 
 function build_common_install_selkies() {
     # Install latest Selkies-GStreamer (https://github.com/selkies-project/selkies-gstreamer) build, Python application, and web application, should be consistent with selkies-gstreamer documentation
-    $APT_INSTALL \
+    $APT_INSTALL --break-system-packages \
         python3-pip \
         python3-dev \
         python3-gi \
@@ -328,7 +328,14 @@ function build_common_install_selkies() {
         intel-media-va-driver-non-free \
         intel-gpu-tools \
         radeontop \
-        gdebi-core libgdk-pixbuf-xlib-2.0-0 libgdk-pixbuf2.0-0 libsoup-gnome2.4-1 libxdo3 python3-chardet python3-debian xdotool
+        gdebi-core \
+        libgdk-pixbuf-xlib-2.0-0 \
+        libgdk-pixbuf2.0-0 \
+        libsoup-gnome2.4-1 \
+        libxdo3 \
+        python3-chardet \
+        python3-debian \
+        xdotool
     
     if [[ -z $SELKIES_VERSION || ${SELKIES_VERSION,,} == 'latest' ]]; then
         SELKIES_VERSION="$(curl -fsSL "https://api.github.com/repos/selkies-project/selkies-gstreamer/releases/latest" \
