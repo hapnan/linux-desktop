@@ -336,9 +336,13 @@ function build_common_install_selkies() {
         python3-chardet \
         python3-debian \
         xdotool \
-        pipx=1.6.0
+        pipx
 
-    
+    pipx install pipx
+
+    sudo apt purge --autoremove pipx
+
+    hash -r
 
     if [[ -z $SELKIES_VERSION || ${SELKIES_VERSION,,} == 'latest' ]]; then
         SELKIES_VERSION="$(curl -fsSL "https://api.github.com/repos/selkies-project/selkies-gstreamer/releases/latest" \
