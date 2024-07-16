@@ -338,7 +338,7 @@ function build_common_install_selkies() {
         xdotool \
         pipx
 
-    pipx ensurepath
+    
 
     if [[ -z $SELKIES_VERSION || ${SELKIES_VERSION,,} == 'latest' ]]; then
         SELKIES_VERSION="$(curl -fsSL "https://api.github.com/repos/selkies-project/selkies-gstreamer/releases/latest" \
@@ -352,9 +352,10 @@ function build_common_install_selkies() {
     cd /tmp
     curl -L -O "https://github.com/selkies-project/selkies-gstreamer/releases/download/v${SELKIES_VERSION}/selkies_gstreamer-${SELKIES_VERSION}-py3-none-any.whl"
     pipx install "selkies_gstreamer-${SELKIES_VERSION}-py3-none-any.whl"
-    
+    pipx ensurepath
+
     cd /opt
-    curl -L "https://github.com/selkies-project/selkies-gstreamer/releases/download/v${SELKIES_VERSION}/selkies-gstreamer-web-v${SELKIES_VERSION}.tar.gz" | tar -zxf -
+    curl -L "https://github.com/selkies-project/selkies-gstreamer/releases/download/v${SELKIES_VERSION}/selkies-gstreamer-web_v${SELKIES_VERSION}.tar.gz" | tar -zxf -
     
     cd /tmp
     curl -L -o selkies-js-interposer.deb "https://github.com/selkies-project/selkies-gstreamer/releases/download/v${SELKIES_VERSION}/selkies_js_interposer_v${SELKIES_VERSION}_ubuntu${version_id}_amd64.deb"
