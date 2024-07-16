@@ -342,16 +342,12 @@ function build_common_install_selkies() {
 
     pipx install pipx
 
-    sudo apt purge --autoremove pipx -y
-    
-    hash -r
 
     if [[ -z $SELKIES_VERSION || ${SELKIES_VERSION,,} == 'latest' ]]; then
         SELKIES_VERSION="$(curl -fsSL "https://api.github.com/repos/selkies-project/selkies-gstreamer/releases/latest" \
             | jq -r '.tag_name' | sed 's/[^0-9\.\-]*//g')"
     fi
 
-    pipx ensurepath --global 
 
     cd /opt
     version_id=$(grep -oP 'VERSION_ID="\K[^"]+' /etc/os-release)
