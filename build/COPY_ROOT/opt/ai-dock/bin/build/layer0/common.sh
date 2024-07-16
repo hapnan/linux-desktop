@@ -336,7 +336,7 @@ function build_common_install_selkies() {
         python3-chardet \
         python3-debian \
         xdotool \
-        pipx
+        pipx=1.6.0
 
     
 
