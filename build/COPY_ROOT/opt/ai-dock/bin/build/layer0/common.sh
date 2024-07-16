@@ -354,7 +354,7 @@ function build_common_install_selkies() {
     curl -L "https://github.com/selkies-project/selkies-gstreamer/releases/download/v${SELKIES_VERSION}/gstreamer-selkies_gpl_v${SELKIES_VERSION}_ubuntu${version_id}_amd64.tar.gz" | tar -zxf -
     
     cd /tmp
-    curl -L "https://github.com/selkies-project/selkies-gstreamer/releases/download/v${SELKIES_VERSION}/selkies_gstreamer-${SELKIES_VERSION}-py3-none-any.whl"
+    curl -L -O "https://github.com/selkies-project/selkies-gstreamer/releases/download/v${SELKIES_VERSION}/selkies_gstreamer-${SELKIES_VERSION}-py3-none-any.whl"
     pipx install "selkies_gstreamer-${SELKIES_VERSION}-py3-none-any.whl"
 
     cd /opt
