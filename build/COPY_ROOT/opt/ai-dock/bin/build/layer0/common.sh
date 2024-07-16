@@ -362,7 +362,7 @@ function build_common_install_selkies() {
     
     cd /tmp
     curl -L -O "https://github.com/selkies-project/selkies-gstreamer/releases/download/v${SELKIES_VERSION}/selkies-js-interposer_v${SELKIES_VERSION}_ubuntu${SELKIES_VERSION}_amd64.deb" 
-    $APT_INSTALL ./selkies-js-interposer_v${SELKIES_VERSION}_ubuntu${version_id}_amd64.deb
+    dpkg -i ./selkies-js-interposer_v${SELKIES_VERSION}_ubuntu${version_id}_amd64.deb
 
 }
 
