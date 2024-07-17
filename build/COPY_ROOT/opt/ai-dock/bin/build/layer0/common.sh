@@ -362,7 +362,7 @@ function build_common_install_selkies() {
     
     cd /tmp
     wget -rvO selkies-js-interposer.deb "https://github.com/selkies-project/selkies-gstreamer/releases/download/v${SELKIES_VERSION}/selkies-js-interposer_v${SELKIES_VERSION}_ubuntu${version_id}_amd64.deb"
-    dpkg -i selkies-js-interposer.deb
+    $APT_INSTALL ./selkies-js-interposer.deb
 
 }
 
@@ -371,3 +371,5 @@ function build_common_install_coturn() {
 }
 
 build_common_main "$@"
+
+/opt/ai-dock/bin/fix-permissions.sh -o container
