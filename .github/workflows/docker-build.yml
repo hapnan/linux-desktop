@@ -56,4 +56,4 @@ jobs:
             IMAGE_BASE=hapnan/base-image:cuda-${{ matrix.cuda }}-${{ matrix.level }}-${{ env.UBUNTU_VERSION }}
           push: true
           provenance: false
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{  env.PACKAGE_NAME }}cuda-${{ matrix.cuda }}-${{ matrix.level }}-${{ env.UBUNTU_VERSION }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/linux-desktop:cuda-${{ matrix.cuda }}-${{ matrix.level }}-${{ env.UBUNTU_VERSION }}
