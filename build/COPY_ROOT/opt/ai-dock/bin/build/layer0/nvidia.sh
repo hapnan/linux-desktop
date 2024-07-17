@@ -16,9 +16,8 @@ build_nvidia_main() {
     
     # Extract NVRTC dependency, https://developer.download.nvidia.com/compute/cuda/redist/cuda_nvrtc/LICENSE.txt
     cd /tmp
-    curl -fsSL -o cuda_nvrtc-linux-x86_64-12.5.82-archive.tar.xz "https://developer.download.nvidia.com/compute/cuda/redist/cuda_nvrtc/linux-x86_64/cuda_nvrtc-linux-x86_64-12.5.82-archive.tar.xz"
-    tar -xJf cuda_nvrtc-linux-x86_64-12.5.82-archive.tar.xz
-    cd cuda_nvrtc-linux-x86_64-12.5.82-archive/nvrtclib
+    curl -fsSL "https://developer.download.nvidia.com/compute/cuda/redist/cuda_nvrtc/linux-x86_64/cuda_nvrtc-linux-x86_64-12.5.82-archive.tar.xz" | tar -xJf -
+    cd cuda_nvrtc-linux-x86_64-12.5.82-archive/lib
     chmod 755 libnvrtc*
     find . -maxdepth 1 -type f -name "*libnvrtc.so.*" -exec sh -c 'ln -snf $(basename {}) libnvrtc.so' \;
     mv -f libnvrtc* /opt/gstreamer/lib/x86_64-linux-gnu/
