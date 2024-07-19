@@ -336,11 +336,9 @@ function build_common_install_selkies() {
         python3-chardet \
         python3-debian \
         xdotool \
-        pipx
+        
 
-    pipx ensurepath
-
-    pipx install pipx
+    
 
 
     if [[ -z $SELKIES_VERSION || ${SELKIES_VERSION,,} == 'latest' ]]; then
@@ -355,7 +353,8 @@ function build_common_install_selkies() {
     
     cd /tmp
     curl -L -O "https://github.com/selkies-project/selkies-gstreamer/releases/download/v${SELKIES_VERSION}/selkies_gstreamer-${SELKIES_VERSION}-py3-none-any.whl"
-    pipx install "selkies_gstreamer-${SELKIES_VERSION}-py3-none-any.whl"
+    python3 -m venv "$VENV_DIR/selkies"
+    "$VENV_DIR/selkies/bin/pip" install "selkies_gstreamer-${SELKIES_VERSION}-py3-none-any.whl"
 
     cd /opt
     curl -fsSL "https://github.com/selkies-project/selkies-gstreamer/releases/download/v${SELKIES_VERSION}/selkies-gstreamer-web_v${SELKIES_VERSION}.tar.gz" | tar -zxf -
@@ -371,5 +370,3 @@ function build_common_install_coturn() {
 }
 
 build_common_main "$@"
-
-/opt/ai-dock/bin/fix-permissions.sh -o container
